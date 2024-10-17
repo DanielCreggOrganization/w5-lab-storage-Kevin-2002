@@ -72,7 +72,13 @@ export class HomePage {
   }
 
   async length() {
-
+    try {
+      const length = await this.storage.length();
+      this.output = `Storage length: ${length}`;
+    } catch (error) {//Don't know which case an error would be thrown
+      console.error('Error getting storage length', error);
+      this.output = `Error getting storage length: ${error}`;
+    }
   }
 
   async forEach() {
