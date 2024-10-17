@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { StorageService } from '../services/storage.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule],
+  imports: [IonicModule, FormsModule, RouterLink],
 })
 export class HomePage {
 
