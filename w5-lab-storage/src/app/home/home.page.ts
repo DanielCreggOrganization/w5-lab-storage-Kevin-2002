@@ -52,7 +52,13 @@ export class HomePage {
   }
 
   async clear() {
-    
+    try {
+      await this.storage.clear();
+      this.output = 'Storage cleared';
+    } catch (error) {//Don't know which case an error would be thrown
+      console.error('Error clearing storage', error);
+      this.output = `Error clearing storage: ${error}`;
+    }
   }
 
   async keys() {
