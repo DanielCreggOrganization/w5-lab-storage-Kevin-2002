@@ -40,4 +40,30 @@ export class HomePage {
       this.output = `Error getting item: ${error}`;
     }
   }
+
+  async removeItem() {
+    try {
+      await this.storage.remove(this.key);
+      this.output = `Removed ${this.key}`;
+    } catch (error) {//for some reason even if it tries to delete a non existing key it won't throw an error
+      console.error('Error removing item', error);
+      this.output = `Error removing item: ${error}`;
+    }
+  }
+
+  async clear() {
+
+  }
+
+  async keys() {
+
+  }
+
+  async length() {
+
+  }
+
+  async forEach() {
+
+  }
 }
