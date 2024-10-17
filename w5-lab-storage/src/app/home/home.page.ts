@@ -82,6 +82,14 @@ export class HomePage {
   }
 
   async forEach() {
-
+    try {
+      await this.storage.forEach((value, key) => {
+        console.log(`Key: ${key}, Value: ${value}`);
+      });
+      this.output = 'Executed forEach on storage';
+    } catch (error) {
+      console.error('Error executing forEach on storage', error);
+      this.output = `Error executing forEach on storage: ${error}`;
+    }
   }
 }
