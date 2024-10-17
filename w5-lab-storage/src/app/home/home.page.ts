@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Storage } from '@ionic/storage-angular';
+import { StorageService } from '../services/storage.service';
 
 
 @Component({
@@ -17,13 +17,13 @@ export class HomePage {
   value: string = '';
   output: string = '';
 
-  constructor(private storage: Storage) {
-    storage.create();
+  constructor(private storageService: StorageService) {
+    
   }
 
   async setItem() {
     try {
-      await this.storage.set(this.key, this.value);
+      await this.storageService.set(this.key, this.value);
       this.output = `Set ${this.key}: ${this.value}`;//` character is needed ' wont work
     } catch (error) {
       console.error('Error setting item', error);
@@ -33,7 +33,7 @@ export class HomePage {
 
   async getItem() {
     try {
-      const value = await this.storage.get(this.key);
+      const value = await this.storageService.get(this.key);
       this.output = `Get ${this.key}: ${value}`;
     } catch (error) {
       console.error('Error getting item', error);
@@ -43,7 +43,7 @@ export class HomePage {
 
   async removeItem() {
     try {
-      await this.storage.remove(this.key);
+      await this.storageService.remove(this.key);
       this.output = `Removed ${this.key}`;
     } catch (error) {//for some reason even if it tries to delete a non existing key it won't throw an error
       console.error('Error removing item', error);
@@ -53,7 +53,7 @@ export class HomePage {
 
   async clear() {
     try {
-      await this.storage.clear();
+      await this.storageService.clear();
       this.output = 'Storage cleared';
     } catch (error) {//Don't know which case an error would be thrown
       console.error('Error clearing storage', error);
@@ -63,7 +63,7 @@ export class HomePage {
 
   async keys() {
     try {
-      const keys = await this.storage.keys();
+      const keys = await this.storageService.keys();
       this.output = `Keys: ${keys.join(', ')}`;
     } catch (error) {//Don't know which case an error would be thrown
       console.error('Error getting keys', error);
@@ -73,7 +73,7 @@ export class HomePage {
 
   async length() {
     try {
-      const length = await this.storage.length();
+      const length = await this.storageService.length();
       this.output = `Storage length: ${length}`;
     } catch (error) {//Don't know which case an error would be thrown
       console.error('Error getting storage length', error);
@@ -83,7 +83,7 @@ export class HomePage {
 
   async forEach() {
     try {
-      await this.storage.forEach((value, key) => {
+      await this.storageService.forEach((value, key) => {
         console.log(`Key: ${key}, Value: ${value}`);
       });
       this.output = 'Executed forEach on storage';
