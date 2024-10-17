@@ -52,11 +52,17 @@ export class HomePage {
   }
 
   async clear() {
-
+    
   }
 
   async keys() {
-
+    try {
+      const keys = await this.storage.keys();
+      this.output = `Keys: ${keys.join(', ')}`;
+    } catch (error) {//Don't know which case an error would be thrown
+      console.error('Error getting keys', error);
+      this.output = `Error getting keys: ${error}`;
+    }
   }
 
   async length() {
